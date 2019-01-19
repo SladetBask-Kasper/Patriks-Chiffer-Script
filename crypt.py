@@ -100,15 +100,27 @@ def bruteforce(iword = "_NONE_", imin = "100", imax = "100000", scanmode = "_NON
     min = int(imin)
     max = int(imax)
 
-    while min <= max:
-        tmp = decrypt(iword, str(min), "quiet")
-        if len(tmp) == len(iword):
-            if scanmode == "--scan-mode":
-                if "hitta" in tmp.lower() or "hon" in tmp.lower() or "hur" in tmp.lower() or "var" in tmp.lower() or "uppgift" in tmp.lower() or "lämna" in tmp.lower() or "bra" in tmp.lower() or "ord" in tmp.lower() or "åtminstonde" in tmp.lower() or "tack" in tmp.lower() or "hur" in tmp.lower() or "kan" in tmp.lower() or "dag" in tmp.lower() or "öga" in tmp.lower() or "väg" in tmp.lower() or "vidrig" in tmp.lower() or "kax" in tmp.lower() or "väg" in tmp.lower() or "och" in tmp.lower() or "vad" in tmp.lower() or "svår" in tmp.lower() or "stop" in tmp.lower() or "jävla" in tmp.lower() or "rikti" in tmp.lower() or "för" in tmp.lower() or "slut" in tmp.lower():
-                    print(str(min) + " : " + tmp)
-            else: print(str(min) + " : " + tmp)
-        min += 1
+    sfor = "_NONE_"
+    if "-search-for:" in scanmode:
+        sfor = scanmode[len("-search-for:"):]
+        print("Searching for : " + str(sfor))
+
+    try:
+        while min <= max:
+            tmp = decrypt(iword, str(min), "quiet")
+            if len(tmp) == len(iword):
+                if scanmode == "--scan-mode":
+                    if "hitta" in tmp.lower() or "hon" in tmp.lower() or "hur" in tmp.lower() or "var" in tmp.lower() or "uppgift" in tmp.lower() or "lämna" in tmp.lower() or "bra" in tmp.lower() or "ord" in tmp.lower() or "åtminstonde" in tmp.lower() or "tack" in tmp.lower() or "hur" in tmp.lower() or "kan" in tmp.lower() or "dag" in tmp.lower() or "öga" in tmp.lower() or "väg" in tmp.lower() or "vidrig" in tmp.lower() or "kax" in tmp.lower() or "väg" in tmp.lower() or "och" in tmp.lower() or "vad" in tmp.lower() or "svår" in tmp.lower() or "stop" in tmp.lower() or "jävla" in tmp.lower() or "rikti" in tmp.lower() or "för" in tmp.lower() or "slut" in tmp.lower():
+                        print(str(min) + " : " + tmp)
+                elif not sfor == "_NONE_":
+                    if tmp.lower() == sfor.lower():
+                        print(str(min) + " : " + tmp)
+                else: print(str(min) + " : " + tmp)
+            min += 1
+    except KeyboardInterrupt:
+        pass
     print("Jobs Done!")
+    print("Tested: " + str(min) + " combinations!")
     exit()
 
 # hjälp meny
@@ -181,5 +193,7 @@ if __name__ == "__main__":
                             bruteforce(argv[2], argv[3], argv[4])
                         else:
                             bruteforce(argv[2], argv[3], argv[4], argv[5])
+        elif argv[1] == "--search-for":
+            bruteforce(argv[2], "100", "9999999999", "-search-for:" + argv[3])
         else :
             help_menu()
