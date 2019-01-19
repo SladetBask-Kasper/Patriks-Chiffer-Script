@@ -44,7 +44,7 @@ python crypt.py --decrypt aaveldtetödg 352140
 ```
 python crypt.py --bruteforce kirgitvstxrå 205 215
 ```
-**Svar:** 210 : riktigtsvårx *(540 - 543 ger samma svar men om man krypterar deras svar med samma nyckel så blir det fel)*
+**Svar:** 210 : riktigtsvårx *(540 - 543 ger samma svar men om man krypterar deras svar med samma nyckel så blir det ej samma krypterade medelande som står i uppgiften)*
 
 #### Övning X
 ```
