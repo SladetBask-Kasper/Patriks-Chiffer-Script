@@ -1,4 +1,4 @@
-# Patriks-Chiffer-Script
+# Patriks-Chiffer (Script)
 En automatisk lösning på uppgiften.
 
 Använding:
