@@ -18,6 +18,8 @@ python crypt.py --decrypt [msg] [key]
 ```
 python crypt.py --bruteforce [msg] ([minkey] [maxkey] [--scan-mode])
 ```
-**minkey = minsta nyckeln den kommer att försöka med. (default: 100). **
+**minkey = minsta nyckeln den kommer att försöka med. (default: 100).**
+
 **maxkey = när den kommer sluta. (default: 100000).**
+
 **--scan-mode = kommer göra så att den hoppar över svar som inte innehåller ord ifrån en lista i programmet.**
