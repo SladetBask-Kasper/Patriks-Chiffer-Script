@@ -50,6 +50,6 @@ python crypt.py --bruteforce kirgitvstxrå 205 215
 ```
 python crypt.py --bruteforce äurntesdtuflirdövgva 2125 2135
 ```
-**Svar:** 2130 : nuärdetslutföridagvv *(Ceasar key: 2 och Inkl. åäö)*
+**Svar:** 2130 : nuärdetslutföridagvv *(Ceasar key: 2 och Inkl. åäö. 2140 ger även samma svar men har samma fel som extrasvaren på Öv. 6)*
 
 
