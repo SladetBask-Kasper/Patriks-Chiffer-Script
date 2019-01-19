@@ -50,6 +50,6 @@ python crypt.py --bruteforce kirgitvstxrå 205 215
 ```
 python crypt.py --bruteforce äurntesdtuflirdövgva 2125 2135
 ```
-**Svar:** 2130 : nuärdetslutföridagvv *Ceasar key: 2*
+**Svar:** 2130 : nuärdetslutföridagvv *(Ceasar key: 2)*
 
 
