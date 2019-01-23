@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# coding=utf-8
 from os import system
 import collections
 from sys import argv
@@ -133,12 +135,18 @@ def help_menu():
 
     exit()
 
-# Arg parser
-if __name__ == "__main__":
+def check_arg(argno):
     try:
-        if argv[1]:
+        if argv[argno]:
             pass
     except:
+        return False
+    else:
+        return True
+
+# Arg parser
+if __name__ == "__main__":
+    if not check_arg(1):
         print("1: encrypt, 2: decrypt.")
         l = str(input(" > "))
         if l == "1":
@@ -147,58 +155,41 @@ if __name__ == "__main__":
             decrypt(iword = "_NONE_", ikey = "_NONE_", kwargs = "hold")
         else:
             print("Error- Invalid input value")
+            exit()
     else:
+        if check_arg(1):
 
-        if argv[1] == "--encrypt" or argv[1] == "--decrypt":
-            try:
-                if argv[2]:
-                    pass
-            except:
+            if not check_arg(2):
+                if argv[1] == "--encrypt": crypt()
+                elif argv[1] == "--decrypt": decrypt()
+                else: help_menu()
+            else:
+                x = len(argv) -1 # 0 = 1 otherwise
                 if argv[1] == "--encrypt":
-                    crypt()
+                    if check_arg(3): crypt(argv[2], argv[3])
+                    else: crypt(argv[2])
                 elif argv[1] == "--decrypt":
-                    decrypt()
-            else:
-                try:
-                    if argv[3]:
-                        pass
-                except:
-                    if argv[1] == "--encrypt":
-                        crypt(argv[2])
-                    elif argv[1] == "--decrypt":
-                        decrypt(argv[2])
+                    if check_arg(3): decrypt(argv[2], argv[3])
+                    else: decrypt(argv[2])
+                elif argv[1] == "--bruteforce":
+                    if x >= 5: bruteforce(argv[2], argv[3], argv[4], argv[5])
+                    elif x == 4: bruteforce(argv[2], argv[3], argv[4])
+                    elif x == 3: bruteforce(argv[2], argv[3])
+                    elif x == 2: bruteforce(argv[2])
+                    elif x == 1: bruteforce()
+                elif argv[1] == "--search-for":
+                    if x >= 5: bruteforce(argv[2], argv[4], argv[5], "-search-for:" + argv[3])
+                    elif x == 4: bruteforce(argv[2], argv[4], "9999999999", "-search-for:" + argv[3])
+                    elif x == 3: bruteforce(argv[2], "100", "9999999999", "-search-for:" + argv[3])
+                    elif x <= 2:
+                        argv2 = "_NONE_"
+                        if x == 2:
+                            argv2 = argv[2]
+                        print("What do you wanna search for?")
+                        print("type \"::Exit\" to exit")
+                        inp = str(input(" > "))
+                        if inp.lower() == "::exit":
+                            exit()
+                        else: bruteforce(argv2, "100", "9999999999", "-search-for:" + inp)
                 else:
-                    if argv[1] == "--encrypt":
-                        crypt(argv[2], argv[3])
-                    elif argv[1] == "--decrypt":
-                        decrypt(argv[2], argv[3])
-        elif argv[1] == "--bruteforce":
-            try:
-                if argv[2]:
-                    pass
-            except:
-                bruteforce()
-            else:
-                try:
-                    if argv[3]:
-                        pass
-                except:
-                    bruteforce(argv[2])
-                else:
-                    try:
-                        if argv[4]:
-                            pass
-                    except:
-                        bruteforce(argv[2], argv[3])
-                    else:
-                        try:
-                            if argv[5]:
-                                pass
-                        except:
-                            bruteforce(argv[2], argv[3], argv[4])
-                        else:
-                            bruteforce(argv[2], argv[3], argv[4], argv[5])
-        elif argv[1] == "--search-for":
-            bruteforce(argv[2], "100", "9999999999", "-search-for:" + argv[3])
-        else :
-            help_menu()
+                    help_menu()
